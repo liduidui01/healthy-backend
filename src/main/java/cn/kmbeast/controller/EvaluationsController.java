@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 评论 Controller
@@ -36,12 +37,12 @@ public class EvaluationsController {
     /**
      * 评论修改
      *
-     * @return Result<String>
+     * @return Result<Map < String, Object>>
      */
     @Protector
     @PutMapping(value = "/update")
     @ResponseBody
-    public Result<Void> update(@RequestBody Evaluations evaluations) {
+    public Result<Map<String, Object>> update(@RequestBody Evaluations evaluations) {
         return evaluationsService.update(evaluations);
     }
 

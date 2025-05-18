@@ -21,6 +21,10 @@ public class CommentParentVO {
      */
     private Integer userId;
     /**
+     * 内容ID
+     */
+    private Integer contentId;
+    /**
      * 用户名
      */
     private String userName;

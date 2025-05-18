@@ -2,10 +2,12 @@ package cn.kmbeast.pojo.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
 
 @Data
+@ToString
 public class CommentChildVO {
     /**
      * 评论ID
@@ -15,6 +17,10 @@ public class CommentChildVO {
      * 父级评论ID
      */
     private Integer parentId;
+    /**
+     * 内容ID
+     */
+    private Integer contentId;
     /**
      * 评论者ID
      */

@@ -9,6 +9,7 @@
         <result property="userName" column="user_name"/>
         <result property="userAvatar" column="user_avatar"/>
         <result property="content" column="content"/>
+        <result property="contentId" column="content_id"/>
         <result property="upvoteList" column="upvoteList"/>
         <result property="childTotal" column="childTotal"/>
         <result property="createTime"
@@ -33,6 +34,7 @@
     <select id="getParentComments" resultMap="commentParentResultMap">
         SELECT e.id                                                            AS id,
                e.content                                                       AS content,
+               e.content_id                                                    AS content_id,
                e.upvote_list                                                   AS upvoteList,
                e.create_time                                                   AS create_time,
                u.id                                                            AS user_id,
@@ -77,6 +79,7 @@
         e.create_time AS createTime,
         e.parent_id AS parentId,
         e.upvote_list AS upvoteList,
+        e.content_id AS contentId,
         e.content_type AS contentType,
         u.id AS userId,
         u.user_name AS userName,
@@ -88,6 +91,9 @@
         LEFT JOIN user u ON u.id = e.commenter_id
         LEFT JOIN user u1 ON u1.id = e.replier_id
         <where>
+            <if test="id != null">
+                AND e.id = #{id}
+            </if>
             <if test="contentType != null and contentType != ''">
                 AND e.content_type = #{contentType}
             </if>
@@ -109,6 +115,9 @@
         SELECT COUNT(*)
         FROM evaluations e
         <where>
+            <if test="id != null">
+                AND e.id = #{id}
+            </if>
             <if test="contentType != null and contentType != ''">
                 AND e.content_type like concat('%',#{contentType},'%')
             </if>
